@@ -33,7 +33,7 @@ public class SecurityConfig {
 	private JWTFilter jtwFilter;
 	
 	@Bean
-	AuthenticationProvider authProvider() {
+    AuthenticationProvider authProvider () {
 		log.info("inside authProvider");
 		DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService);
@@ -44,7 +44,7 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		log.info("inside securityFilterChain");
-		return http.csrf(AbstractHttpConfigurer::disable)
+        return http.csrf (AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(request -> request
 						.requestMatchers("/register","/login","/swagger-ui/**","/swagger-ui.html","/v3/api-docs/**").permitAll()  //to create no need to authenticate
 						.anyRequest().authenticated())
@@ -57,7 +57,7 @@ public class SecurityConfig {
 	
 	@Bean
 	AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-		 return configuration.getAuthenticationManager();
+        return configuration.getAuthenticationManager ();
 	}
 		
 }
