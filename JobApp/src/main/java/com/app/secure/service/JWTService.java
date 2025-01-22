@@ -1,20 +1,18 @@
 package com.app.secure.service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
-
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JWTService {
@@ -48,7 +46,7 @@ public class JWTService {
                 .header().empty().add("type","JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000*60*30))
+				.expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getKey()).compact();
 
     }
@@ -73,8 +71,7 @@ public class JWTService {
         		.verifyWith(getKey())
         		.build()
         		.parseSignedClaims(token)
-        		.getPayload();
-        		
+				.getPayload();
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
