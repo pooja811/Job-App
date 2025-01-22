@@ -16,14 +16,23 @@ import com.app.entity.JobPost;
 import com.app.entity.PostResponse;
 import com.app.service.JobService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
+@Tag(name = "JobController APIs", description = "Access the Job App API")
 public class JobController {
 
 	@Autowired
 	private JobService service;
 
 	@GetMapping("jobPosts")
+	@Operation(summary = "Get All Jobs")
+	@ApiResponses(value = { @ApiResponse(responseCode = "401", description = "Your session is expired."),
+			@ApiResponse(responseCode = "403", description = "Forbidden, invalid username or password.") })
 	public PostResponse getAllJobs(
 			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
 			@RequestParam(value = "pageSize", defaultValue = "4", required = false) Integer pageSize,
