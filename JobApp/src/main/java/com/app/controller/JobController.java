@@ -47,6 +47,8 @@ public class JobController {
 //	@GetMapping("jobPosts/filter/{keyword}")
 //	public List<JobPost> searchBySkill(@PathVariable("keyword") String keyword) {
 //		return service.searchBySkills(keyword);
+	//public List<JobPost> searchBySkill(@PathVariable("keyword") String keyword) {
+//	return service.searchBySkills(keyword);
 //
 //	}
 
